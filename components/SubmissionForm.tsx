@@ -2,16 +2,26 @@ import React, { useState, useRef } from "react";
 import { UploadIcon } from "lucide-react";
 
 // notes - form component should have first name, email, phone, resume, linkedin = general greenhouse components
+
+type FormFields = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+  };
+
+  
 const SubmissionForm = () => {
     const [resume, setResume] = useState<File | null>(null); // file input
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormFields>({
         first_name: "",
         last_name: "",
         email: "",
         phone: "",
       });
+      
 
     // to manage text inputs
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +66,7 @@ const SubmissionForm = () => {
         greenhouseData.append("phone", formData.phone)
         greenhouseData.append("resume", resume, resume.name)
 
-        for (let pair of greenhouseData.entries()) {
+        for (const pair of greenhouseData.entries()) {
             console.log(pair[0], pair[1]);
         }
 
@@ -105,7 +115,7 @@ const SubmissionForm = () => {
             </label>
             <input
               id={field}
-              value={(formData as any)[field]}
+              value={formData[field as keyof FormFields]}
               onChange={handleTextInput}
               className="w-full px-4 py-2 rounded-md bg-gray-50 border border-gray-300 focus:outline-none focus:border-blue-600 transition"
             />

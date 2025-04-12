@@ -1,3 +1,4 @@
+// actual greenhouse api implementation
 // import { NextRequest, NextResponse } from "next/server";
 // import { Readable } from "stream";
 
@@ -63,6 +64,7 @@
 //   }
 // }
 
+// mock submission 
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
